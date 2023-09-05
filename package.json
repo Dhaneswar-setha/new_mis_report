@@ -1,0 +1,46 @@
+{
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "latest",
+    "@mui/lab": "^5.0.0-alpha.133",
+    "@mui/material": "^5.14.0",
+    "@mui/x-date-pickers": "^6.9.1",
+    "axios": "^1.4.0",
+    "dayjs": "^1.11.8",
+    "file-saver": "^2.0.5",
+    "moment": "^2.29.4",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-datepicker": "^4.12.0",
+    "react-dom": "latest",
+    "react-router-dom": "^6.12.0",
+    "styled": "^1.0.0",
+    "styled-components": "^4.4.1",
+    "xlsx": "^0.17.1"
+  },
+  "description": "https://github.com/mui/material-ui/blob/v5.13.4/docs/data/material/components/drawers/ResponsiveDrawer.js",
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "name": "kqlm6j",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
