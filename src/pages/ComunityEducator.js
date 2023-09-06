@@ -6,13 +6,13 @@ import Logo from "../components/Logo";
 import Links from "../components/Links";
 import Number from "../components/Number";
 import moment from "moment/moment";
-import Api from "../Api/Api";
+import Api from "../environment/Api";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import ReusableTextField from "../components/ReusableTextField";
-import { getAllCommunityEducatiorFilter } from "../Api/ComunityEducator";
+import { getAllCommunityEducatiorFilter } from "../AllApi/ComunityEducator";
 
 const managerTypeSet = [
   { value: "none", label: "none" },
