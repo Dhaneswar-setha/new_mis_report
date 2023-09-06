@@ -1,18 +1,15 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from "react";
 import Text from "../components/Text";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import Api from "../envirment/Api";
-import Logo from '../components/Logo';
-import Select1 from '../components/Select1';
-import ReusableTextField from '../components/ReusableTextField';
+import Api from "../api/Api";
+import Logo from "../components/Logo";
+import Select1 from "../components/Select1";
+import ReusableTextField from "../components/ReusableTextField";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-
-
-
 
 const managerTypeSet = [
   {
@@ -33,74 +30,69 @@ const managerTypeSet = [
   },
 ];
 
-
-
 const PromotedStudent = () => {
-   const [managerArr, setManagerArr] = useState([]);
- const [selectedYear, setSelectedYear] = useState("");
- const [managerName, setManagerName] = useState("");
- const [managerType, setManagerType] = useState("");
+  const [managerArr, setManagerArr] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("");
+  const [managerName, setManagerName] = useState("");
+  const [managerType, setManagerType] = useState("");
   const [passcode, setPasscode] = useState("");
-    const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-   useEffect(() => {
-     Api.get(`getManagerIdsWidPasscode`).then((response) => {
-       setManagerArr(response.data.resData);
-     });
-   }, []);
+  useEffect(() => {
+    Api.get(`getManagerIdsWidPasscode`).then((response) => {
+      setManagerArr(response.data.resData);
+    });
+  }, []);
 
-   let passcodeArray = [];
+  let passcodeArray = [];
 
-   managerArr?.filter((element) => {
-     if (element.managerid === managerName) {
-       console.log("x--->", managerName, element);
-       passcodeArray = element.passcodes;
-       console.log("passcodeArray--->", passcodeArray);
-     }
-   });
+  managerArr?.filter((element) => {
+    if (element.managerid === managerName) {
+      console.log("x--->", managerName, element);
+      passcodeArray = element.passcodes;
+      console.log("passcodeArray--->", passcodeArray);
+    }
+  });
 
-      const handleYearChange = (selectedYear) => {
-        setSelectedYear(selectedYear);
-      };
+  const handleYearChange = (selectedYear) => {
+    setSelectedYear(selectedYear);
+  };
 
-      const handleManagerChange = (event) => {
-        setManagerName(event.target.value);
-      };
-      const handleManagerTypeChange = (event) => {
-        setManagerType(event.target.value);
-      };
+  const handleManagerChange = (event) => {
+    setManagerName(event.target.value);
+  };
+  const handleManagerTypeChange = (event) => {
+    setManagerType(event.target.value);
+  };
 
-      const handlePasscodeChange = (event) => {
-        setPasscode(event.target.value);
-      };
+  const handlePasscodeChange = (event) => {
+    setPasscode(event.target.value);
+  };
 
   const promotedS = async () => {
-     if (
-       selectedYear === "" ||
-       managerName === "" ||
-       passcode === ""
-     ) {
-       return alert("Please select some filters to preceed");
-     }
-  
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const body = {
-        year: selectedYear,
-        managerid: managerName,
-        passcode: passcode,
+    if (selectedYear === "" || managerName === "" || passcode === "") {
+      return alert("Please select some filters to preceed");
+    }
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
-     setLoaded(false);
-      try {
-        const res = await Api.post(`getPromotedStudentsReport`, body, config);
-          if (res.status === 200) {
-         setLoaded(true);
-        }
-      
-      } catch (error) { setLoaded(true);}
+    const body = {
+      year: selectedYear,
+      managerid: managerName,
+      passcode: passcode,
+    };
+    setLoaded(false);
+    try {
+      const res = await Api.post(`getPromotedStudentsReport`, body, config);
+      if (res.status === 200) {
+        setLoaded(true);
+      }
+    } catch (error) {
+      setLoaded(true);
+    }
   };
   return (
     <>
@@ -120,7 +112,6 @@ const PromotedStudent = () => {
             currencies={managerTypeSet}
             handleChange={handleManagerTypeChange}
           />
-
 
           <TextField
             id="outlined-select-currency"
@@ -159,6 +150,6 @@ const PromotedStudent = () => {
       {loaded && <Logo />}
     </>
   );
-}
+};
 
-export default PromotedStudent
+export default PromotedStudent;

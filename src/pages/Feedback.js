@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Text from "../components/Text";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Api from "../envirment/Api";
+import Api from "../api/Api";
 import Logo from "../components/Logo";
 const managerSet = [
   {
@@ -95,7 +95,7 @@ const Feedback = () => {
   const [manager, setManager] = useState("");
   const [managerType, setManagerType] = useState("");
   const [passcode, setPasscode] = useState("");
-   const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
@@ -123,9 +123,9 @@ const Feedback = () => {
       },
     };
     const body = {
-    userids: ["arun@gmail.com", "ajit@gmail.com"],
+      userids: ["arun@gmail.com", "ajit@gmail.com"],
     };
-     setLoaded(false);
+    setLoaded(false);
     try {
       const res = await Api.post(
         ` tchactivitynew_getactivitiydetails_passcodewise`,
@@ -133,9 +133,11 @@ const Feedback = () => {
         config
       );
       if (res.status === 200) {
-         setLoaded(true);
+        setLoaded(true);
       }
-    } catch (error) { setLoaded(true);}
+    } catch (error) {
+      setLoaded(true);
+    }
   };
 
   return (
@@ -187,7 +189,5 @@ const Feedback = () => {
     </>
   );
 };
-
-
 
 export default Feedback;

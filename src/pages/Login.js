@@ -4,6 +4,7 @@ import Links from "../components/Links";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Api from "../api/Api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Login = () => {
       usertype: "manager",
       loginType: "password",
     };
+
     try {
       const res = await axios.post(
         "https://thinkzone.in.net/thinkzone/authenticateuser",
@@ -88,14 +90,14 @@ const Login = () => {
               background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
           }
 
-          .login-div {
-            width: 430px;
-            height: 700px;
-            padding: 60px 35px 35px;
-            border-radius: 40px;
-            background-color: #ecf0f3;
-            box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
-          }
+          // .login-div {
+          //   width: 430px;
+          //   height: 700px;
+          //   padding: 60px 35px 35px;
+          //   border-radius: 40px;
+          //   background-color: #ecf0f3;
+          //   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+          // }
 
           .logo {
             background: url('../img/1200px-Purple_(01).png');
@@ -125,21 +127,21 @@ const Login = () => {
             padding: 75px 5px 5px;
           }
 
-          .fields input {
-            border: none;
-            outline: none;
-            background: none;
-            font-size: 18px;
-            color: #555;
-            padding: 20px 10px 20px 5px;
-          }
+          // .fields input {
+          //   border: none;
+          //   outline: none;
+          //   background: none;
+          //   font-size: 18px;
+          //   color: #555;
+          //   padding: 20px 10px 20px 5px;
+          // }
 
-          .username,
-          .password {
-            margin-bottom: 30px;
-            border-radius: 25px;
-            box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-          }
+          // .username,
+          // .password {
+          //   margin-bottom: 30px;
+          //   border-radius: 25px;
+          //   box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+          // }
 
           .fields svg {
             height: 22px;
