@@ -1,4 +1,4 @@
-import Api from "../envirment/Api";
+import Api from "./Api";
 
 export const getAllCommunityEducatiorFilter = async () =>
   await Api.get(`getManagerIdsWidPasscode`);
