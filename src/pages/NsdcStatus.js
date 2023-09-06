@@ -5,7 +5,7 @@ import Filter from "../components/Filter";
 import { TextField } from "@mui/material";
 import Logo from "../components/Logo";
 import Links from "../components/Links";
-import Api from "../envirment/Api";
+import Api from "../api/Api";
 import ReusableTextField from "../components/ReusableTextField";
 import MenuItem from "@mui/material/MenuItem";
 import Fields from "../components/Fields";
@@ -35,43 +35,43 @@ const NsdcStatus = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [managerType, setManagerType] = useState("");
   const [passcode, setPasscode] = useState("");
-    const [page, setPage] = React.useState(0);
-    const [totalDataLength, setTotalDataLength] = useState(0);
+  const [page, setPage] = React.useState(0);
+  const [totalDataLength, setTotalDataLength] = useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [loaded, setLoaded] = useState(false);
 
   const [data, setData] = useState([]);
 
-   useEffect(() => {
-     Api.get(`getManagerIdsWidPasscode`).then((response) => {
-       setManagerArr(response.data.resData);
-     });
-   }, []);
+  useEffect(() => {
+    Api.get(`getManagerIdsWidPasscode`).then((response) => {
+      setManagerArr(response.data.resData);
+    });
+  }, []);
 
-   let passcodeArray = [];
+  let passcodeArray = [];
 
-   managerArr?.filter((element) => {
-     if (element.managerid === managerName) {
-       console.log("x--->", managerName, element);
-       passcodeArray = element.passcodes;
-       console.log("passcodeArray--->", passcodeArray);
-     }
-   });
+  managerArr?.filter((element) => {
+    if (element.managerid === managerName) {
+      console.log("x--->", managerName, element);
+      passcodeArray = element.passcodes;
+      console.log("passcodeArray--->", passcodeArray);
+    }
+  });
 
   const handleCallAPI = async () => {
-     setLoaded(false);
+    setLoaded(false);
     try {
       const response = await Api.get(
         `https://thinkzone.co/thinkzone/getmanagerwisefellowsnsdcdata/${selectedYear}/${managerName}/${passcode}/0/0/0/1`
       );
       if (response.data.status === "success") {
         console.log("data------------->", response);
-        setData(response.data.data)
-         setLoaded(true);
-         setTotalDataLength(response.data.data.length);
+        setData(response.data.data);
+        setLoaded(true);
+        setTotalDataLength(response.data.data.length);
       }
     } catch (error) {
-       setLoaded(true);
+      setLoaded(true);
     }
   };
 
@@ -91,7 +91,7 @@ const NsdcStatus = () => {
     setPasscode(event.target.value);
   };
 
-  const handleChangePage = (event,newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
@@ -99,7 +99,6 @@ const NsdcStatus = () => {
     setRowsPerPage(event.target.value);
     setPage(0);
   };
-   
 
   const columns = [
     "Serial No",
@@ -110,7 +109,7 @@ const NsdcStatus = () => {
     "nsdc marks",
     "nsdc Status",
     "userId",
-    "UserName",   
+    "UserName",
   ];
   const getCellValue = (row, column, index) => {
     switch (column) {
@@ -132,7 +131,7 @@ const NsdcStatus = () => {
         return row.userid;
       case "UserName":
         return row.username;
-      
+
       default:
         return "";
     }

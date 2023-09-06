@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-// const Dashboard = "http://localhost:3000/home/dashboard";
-import Links from "../components/Links";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 
 const Login = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  // const [response, setResponse] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const authentication = async () => {
@@ -24,6 +22,7 @@ const Login = () => {
       usertype: "manager",
       loginType: "password",
     };
+
     try {
       const res = await axios.post(
         "https://thinkzone.in.net/thinkzone/authenticateuser",
@@ -55,8 +54,13 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Input validation: Check if either of the fields is empty
+    if (!userId.trim() || !password.trim()) {
+      alert("Please fill in both fields.");
+      return;
+    }
 
-    authentication(); // Call the authentication function after form submission
+    authentication();
   };
 
   useEffect(() => {
@@ -65,189 +69,156 @@ const Login = () => {
       navigate("/home/dashboard");
     }
   }, []);
+
   return (
     <div>
-      <style>
-        {`
-          * {
-            box-sizing: border-box;
-    
-          }
-
-          body {
-            margin: 0;
-            height: 100vh;
-            width: 100vw;
-            font-weight: 700;
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            flex-wrap:wrap;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-              background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
-          }
-
-          .login-div {
-            width: 430px;
-            height: 700px;
-            padding: 60px 35px 35px;
-            border-radius: 40px;
-            background-color: #ecf0f3;
-            box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
-          }
-
-          .logo {
-            background: url('../img/1200px-Purple_(01).png');
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto;
-            box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #afaaa7, -8px -8px 15px #fff;
-          }
-
-          .title {
-            text-align: center;
-            font-size: 28px;
-            padding-top: 24px;
-            letter-spacing: 0.5px;
-          }
-
-          .sub-title {
-            text-align: center;
-            font-size: 15px;
-            padding-top: 7px;
-            letter-spacing: 3px;
-          }
-
-          .fields {
-            width: 100%;
-            padding: 75px 5px 5px;
-          }
-
-          .fields input {
-            border: none;
-            outline: none;
-            background: none;
-            font-size: 18px;
-            color: #555;
-            padding: 20px 10px 20px 5px;
-          }
-
-          .username,
-          .password {
-            margin-bottom: 30px;
-            border-radius: 25px;
-            box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-          }
-
-          .fields svg {
-            height: 22px;
-            margin: 0 10px -3px 25px;
-          }
-
-          .signin-button {
-            outline: none;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            height: 60px;
-            border-radius: 30px;
-            font-size: 20px;
-            font-weight: 700;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #fff;
-            text-align: center;
-            background-color: #02c8db;
-            box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #fff;
-            transition: all 0.5s;
-          }
-
-          .signin-button:hover {
-            background-color: #50e5b9;
-          }
-
-          .link {
-            padding-top: 20px;
-            text-align: center;
-          }
-
-          .link a {
-            text-decoration: none;
-            color: #aaa;
-            font-size: 15px;
-          }`}
-      </style>
-      <div className="login-div">
-        {/* Your JSX code for the login form goes here */}
-        <form onSubmit={handleSubmit}>
-          <div className="logo">
-            <img
-              src="https://th.bing.com/th/id/R.7ab7ffd6535f7df24a1bba57977927a3?rik=7Iy8ftpgY%2fBUPw&riu=http%3a%2f%2fwww.alterbeat.com%2fuploads%2f7%2f0%2f6%2f4%2f70641135%2fthinkzone-logo_7_orig.png&ehk=S3PCOXxbWQ9GVYIn55aFmdrJDVFcZZrfentJTCNZsXg%3d&risl=&pid=ImgRaw&r=0"
-              width="85"
-              height="85"
-            />
-          </div>
-          <div className="title">LOGIN FORM</div>
-          <div className="sub-title">M.I.S REPORT</div>
-          <div className="fields">
-            <div className="username">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              ></svg>
-              <input
-                type="text"
-                className="user-input"
-                placeholder="Username"
-                value={userId}
-                onChange={handleUserIdChange}
+      <div
+        style={{
+          background: "linear-gradient(to bottom, #0074e4, #00a1e9)", // Background color
+          minHeight: "100vh", // Minimum height to cover the viewport
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className="login-div"
+          style={{
+            maxWidth: "500px", // Limit the width for responsiveness
+            padding: "40px",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Box shadow for a box-like structure
+            backgroundColor: "#ffffff", // Background color of the login box
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <div className="logo">
+              <img
+                src="https://thinkzone.in/wp-content/uploads/2022/06/Instagram-1-1-1-1-2.png"
+                width="85"
+                height="85"
+                alt="ThinkZone Logo"
+                style={{
+                  maxWidth: "95px",
+                  maxHeight: "95px",
+                  display: "block",
+                  margin: "0 auto",
+                  borderRadius: "10px",
+                  // background: "linear-gradient(to bottom, #0074e4, #00a1e9)",
+                }}
               />
             </div>
-            <div className="password">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* SVG path */}
-              </svg>
-              <input
-                autoComplete="off"
-                type={showPassword ? "text" : "password"}
-                className="pass-input"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              <button
-                type="button"
-                className="eye-button"
-                onClick={toggleShowPassword}
+            <div
+              className="title"
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                textAlign: "center",
+                marginTop: "15px",
+                fontStyle: "inherit",
+              }}
+            >
+              Welcome!
+            </div>
+            <div
+              // className="sub-title"
+              style={{
+                marginTop: "15px",
+                fontSize: "18px",
+                fontWeight: "bold",
+                textAlign: "center",
+                fontStyle: "normal",
+                color: "#36454F",
+              }}
+            >
+              ThinkZone is a social enterprise that works towards improving the
+              learning outcomes of children from under-resourced communities.
+            </div>
+            <div className="fields" style={{ marginTop: "20px" }}>
+              <div
+                className="username"
                 style={{
-                  textDecoration: "none",
-                  border: "0px",
+                  marginBottom: "15px",
                 }}
               >
-                {/* Eye icon for showing/hiding password */}
-                {showPassword ? "👁️" : "👁️‍🗨️"}
-              </button>
+                <input
+                  type="text"
+                  className="user-input"
+                  placeholder="Username"
+                  value={userId}
+                  onChange={handleUserIdChange}
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    width: "95%",
+                    padding: "10px",
+                  }}
+                />
+              </div>
+              <div
+                className="password"
+                style={{ flex: 1, flexDirection: "row" }}
+              >
+                <input
+                  autoComplete="off"
+                  type={showPassword ? "text" : "password"}
+                  className="pass-input"
+                  placeholder="Password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    width: "85%",
+                    padding: "10px",
+                  }}
+                />
+
+                <button
+                  type="button"
+                  className="eye-button"
+                  onClick={toggleShowPassword}
+                  style={{
+                    border: "0px",
+                    backgroundColor: "transparent",
+                    fontSize: "10px",
+                    // marginTop: "40px",
+                    color: "#000", // Customize the color as needed
+                  }}
+                >
+                  {showPassword ? (
+                    <span className="material-icons">
+                      <VisibilityRoundedIcon />
+                    </span>
+                  ) : (
+                    <span className="material-icons">
+                      <VisibilityOffRoundedIcon />
+                    </span>
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
-          <button type="submit" className="signin-button">
-            Login
-          </button>
-        </form>
-        {/* <div className="link">
-          <a href="#">Forget password?</a> or <a href="#">Sign Up</a>
-        </div> */}
+            <button
+              type="submit"
+              className="signin-button"
+              style={{
+                background: "linear-gradient(to bottom, #0074e4, #00a1e9)",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                padding: "10px",
+                marginTop: "15px",
+                cursor: "pointer",
+                fontWeight: "bold",
+                fontSize: "16px",
+                width: "100%",
+              }}
+            >
+              Login
+            </button>
+          </form>
+        </div>
       </div>
-      {/* <Links /> */}
     </div>
   );
 };
