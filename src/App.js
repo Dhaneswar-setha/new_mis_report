@@ -20,7 +20,7 @@ import PromotedStudent from "./pages/PromotedStudent";
 import Feedback from "./pages/Feedback";
 import Login from "./pages/Login";
 // import PromotedStudent from "./pages/PromotedStudent";
-
+import ComunityEducator from "./pages/ComunityEducator";
 const router = createBrowserRouter([{ path: "*", Component: Root }]);
 
 export default function App() {
@@ -44,6 +44,7 @@ function Root() {
           <Route path="/home/Fln" element={<Fln />} />
           <Route path="/home/PromotedStudent" element={<PromotedStudent />} />
           <Route path="/home/Feedback" element={<Feedback />} />
+          <Route path="/home/ComunityEducator" element={<ComunityEducator />} />
         </Route>
       </Route>
       <Route path="/" element={<Login />} />
