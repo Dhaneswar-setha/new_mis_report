@@ -22,6 +22,7 @@ const Login = () => {
       usertype: "manager",
       loginType: "password",
     };
+
     try {
       const res = await axios.post(
         "https://thinkzone.in.net/thinkzone/authenticateuser",

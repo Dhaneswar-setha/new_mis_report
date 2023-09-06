@@ -1,20 +1,15 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Text from "../components/Text";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Logo from "../components/Logo";
 import Links from "../components/Links";
-import Api from "../envirment/Api";
+import Api from "../api/Api";
 import Fields from "../components/Fields";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import ReusableTextField from "../components/ReusableTextField";
 import Select1 from "../components/Select1";
-
-
-
-
-
 
 const year = [
   {
@@ -45,21 +40,18 @@ const selectManagerType = [
   },
 ];
 
-
-
 const TrainingDetails = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [managerName, setManagerName] = useState("");
   const [passcode, setPasscode] = useState("");
   const [managerType, setManagerType] = useState("");
   const [data, setData] = useState([]);
-const [page, setPage] = React.useState(0);
-const [totalDataLength, setTotalDataLength] = useState(0);
+  const [page, setPage] = React.useState(0);
+  const [totalDataLength, setTotalDataLength] = useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [loaded, setLoaded] = useState(false);
   const [managerArr, setManagerArr] = useState([]);
-  
-  
+
   useEffect(() => {
     Api.get(`getManagerIdsWidPasscode`).then((response) => {
       setManagerArr(response.data.resData);
@@ -89,9 +81,8 @@ const [totalDataLength, setTotalDataLength] = useState(0);
     setPasscode(event.target.value);
   };
   const handleManagerTypeChange = (event) => {
-    setManagerType(event.target.value)
-  }
-  
+    setManagerType(event.target.value);
+  };
 
   const getfellowsallstatusdata = async () => {
     const config = {
@@ -105,8 +96,8 @@ const [totalDataLength, setTotalDataLength] = useState(0);
       managername: managerName,
       passcode: passcode,
     };
-setLoaded(false);
-    try{
+    setLoaded(false);
+    try {
       const res = await Api.post(`getfellowsallstatusdata`, body, config);
       // console.log("response---->", res.status);
       if (res.status === 200) {
@@ -115,18 +106,19 @@ setLoaded(false);
         setLoaded(true);
         console.log("res------>", res);
       }
-    } catch (error) {setLoaded(true);}
+    } catch (error) {
+      setLoaded(true);
+    }
   };
 
-  const handleChangePage = (event,newPage) => {
-    setPage(newPage)
-  }
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(event.target.value);
     setPage(0);
-  }
+  };
 
-  
   const columns = [
     "Serial No",
     "User Id",
@@ -141,7 +133,6 @@ setLoaded(false);
     "training_trans_topics_count",
     "training_mark",
     "training_status",
-
   ];
 
   const getCellValue = (row, column, index) => {

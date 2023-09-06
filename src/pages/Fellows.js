@@ -6,7 +6,7 @@ import Logo from "../components/Logo";
 import Links from "../components/Links";
 import Number from "../components/Number";
 import moment from "moment/moment";
-import Api from "../envirment/Api";
+import Api from "../api/Api";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -80,7 +80,7 @@ const Fellows = () => {
     };
     setLoaded(false);
     try {
-      const res = await Api.post(`sortteacher`, body,config);
+      const res = await Api.post(`sortteacher`, body, config);
       if (res.status === 200) {
         setData(res.data);
         setTotalDataLength(res.data.length);
@@ -209,14 +209,12 @@ const Fellows = () => {
             ))}
           </TextField>
 
-      
-
-              <ReusableTextField
-        label="Select passcode"
-        value={passcode}
-        options={passcodeArray}
-        onChange={handlePasscodeChange}
-      />
+          <ReusableTextField
+            label="Select passcode"
+            value={passcode}
+            options={passcodeArray}
+            onChange={handlePasscodeChange}
+          />
 
           <Stack spacing={2} direction="row">
             <Button

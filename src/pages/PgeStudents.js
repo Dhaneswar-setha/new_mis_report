@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import Logo from "../components/Logo";
 import Links from "../components/Links";
 import { json } from "react-router-dom";
-import Api from "../envirment/Api";
+import Api from "../api/Api";
 const managerTypeSet = [
   {
     value: "manager",
@@ -22,7 +22,6 @@ const managerTypeSet = [
     value: "employee",
     label: "employee",
   },
-
 ];
 
 const managerSet = [
@@ -81,25 +80,24 @@ const yearSet = [
   },
 ];
 const PgeStudents = () => {
-
   const [year, SetYear] = useState("");
   const [managerType, setManagerType] = useState("");
   const [manager, setManager] = useState("");
   const [passcode, setPasscode] = useState("");
 
   const handleYearChange = (event) => {
-  SetYear(event.target.value)
-}
+    SetYear(event.target.value);
+  };
   const handleManagerTypeChange = (event) => {
-  setManagerType(event.target.value)
-}
+    setManagerType(event.target.value);
+  };
 
   const handleManagerChange = (event) => {
-  setManager(event.target.value)
-  }
+    setManager(event.target.value);
+  };
   const handlePasscodeChange = (event) => {
-    setPasscode(event.target.value)
-  }
+    setPasscode(event.target.value);
+  };
   const PgeStudent = async () => {
     const config = {
       headers: {
@@ -146,11 +144,31 @@ const PgeStudents = () => {
             gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))",
           }}
         >
-          <Text name="Select year" currencies={yearSet} handleChange={handleYearChange} />
-          <Text name="Select manager-type" currencies={managerTypeSet} handleChange={handleManagerTypeChange}/>
-          <Text name="Select manager" currencies={managerSet} handleChange={handleManagerChange}/>
-          <Text name="Select passcode" currencies={passcodeSet} handleChange={handlePasscodeChange}/>
-          <Filter details="Filter" handleClick={PgeStudent}      style={{ width: 250 }} />
+          <Text
+            name="Select year"
+            currencies={yearSet}
+            handleChange={handleYearChange}
+          />
+          <Text
+            name="Select manager-type"
+            currencies={managerTypeSet}
+            handleChange={handleManagerTypeChange}
+          />
+          <Text
+            name="Select manager"
+            currencies={managerSet}
+            handleChange={handleManagerChange}
+          />
+          <Text
+            name="Select passcode"
+            currencies={passcodeSet}
+            handleChange={handlePasscodeChange}
+          />
+          <Filter
+            details="Filter"
+            handleClick={PgeStudent}
+            style={{ width: 250 }}
+          />
         </div>
 
         <div
